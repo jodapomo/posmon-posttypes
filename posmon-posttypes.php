@@ -151,3 +151,17 @@ function taxonomia_linea_categoria_producto() {
   }
   
   add_action('init', 'taxonomia_linea_categoria_producto');
+
+function wpb_change_title_text_productos( $title ){
+	$screen = get_current_screen();
+ 
+	if  ( 'productos' == $screen->post_type ) {
+		$title = 'Introduce la referencia aquí';
+	} else if ( 'lineas' == $screen->post_type ) {
+		$title = 'Introduce el nombre de la línea aquí';
+	}
+ 
+	return $title;
+}
+ 
+add_filter( 'enter_title_here', 'wpb_change_title_text_productos' );
