@@ -116,6 +116,7 @@ function crear_post_type_productos() {
 		'exclude_from_search'   => false,
 		'publicly_queryable'    => true,
 		'capability_type'       => 'page',
+		'show_in_rest'  		=> true,
 	);
 	register_post_type( 'productos', $args );
 
@@ -144,7 +145,7 @@ function taxonomia_linea_categoria_producto() {
 		'show_ui' => true,
 		'show_admin_column' => true,
 		'query_var' => true,
-		'rewrite' => array('slug' =>'linea-categoria')
+		'rewrite' => array('slug' =>'linea-categoria'),
 	);
 	register_taxonomy( 'linea-categoria', array('productos'), $args);
   
