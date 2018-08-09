@@ -160,9 +160,69 @@ function wpb_change_title_text_productos( $title ){
 		$title = 'Introduce la referencia aquí';
 	} else if ( 'lineas' == $screen->post_type ) {
 		$title = 'Introduce el nombre de la línea aquí';
+	} else if ( 'telas' == $screen->post_type ) {
+		$title = 'Introduce el nombre de la tela aquí';
 	}
  
 	return $title;
 }
  
 add_filter( 'enter_title_here', 'wpb_change_title_text_productos' );
+
+
+
+function crear_post_type_telas() {
+
+	$labels = array(
+		'name'                  => _x( 'Telas', 'Post Type General Name', 'posmon' ),
+		'singular_name'         => _x( 'Tela', 'Post Type Singular Name', 'posmon' ),
+		'menu_name'             => __( 'Telas', 'posmon' ),
+		'name_admin_bar'        => __( 'Tela', 'posmon' ),
+		'archives'              => __( 'Item Archives', 'posmon' ),
+		'attributes'            => __( 'Item Attributes', 'posmon' ),
+		'parent_item_colon'     => __( 'Tela Padre', 'posmon' ),
+		'all_items'             => __( 'Todas las Telas', 'posmon' ),
+		'add_new_item'          => __( 'Agregar Nueva Tela', 'posmon' ),
+		'add_new'               => __( 'Agregar Tela', 'posmon' ),
+		'new_item'              => __( 'Nueva Tela', 'posmon' ),
+		'edit_item'             => __( 'Editar Tela', 'posmon' ),
+		'update_item'           => __( 'Actualizar Tela', 'posmon' ),
+		'view_item'             => __( 'Ver Tela', 'posmon' ),
+		'view_items'            => __( 'Ver Telas', 'posmon' ),
+		'search_items'          => __( 'Buscar Tela', 'posmon' ),
+		'not_found'             => __( 'No encontrado', 'posmon' ),
+		'not_found_in_trash'    => __( 'No encontrado en la papelera', 'posmon' ),
+		'featured_image'        => __( 'Imagen Destacada', 'posmon' ),
+		'set_featured_image'    => __( 'Establecer Imagen Destacada', 'posmon' ),
+		'remove_featured_image' => __( 'Remover Imagen Destacada', 'posmon' ),
+		'use_featured_image'    => __( 'Usar como Imagen Destacada', 'posmon' ),
+		'insert_into_item'      => __( 'Insertar en el elemento', 'posmon' ),
+		'uploaded_to_this_item' => __( 'Subido a este artículo', 'posmon' ),
+		'items_list'            => __( 'Lista de elementos', 'posmon' ),
+		'items_list_navigation' => __( 'Navegación de Lista de Elementos', 'posmon' ),
+		'filter_items_list'     => __( 'Filtrar lista de elementos', 'posmon' ),
+	);
+	$args = array(
+		'label'                 => __( 'Telas', 'posmon' ),
+		'description'           => __( 'Telas', 'posmon' ),
+		'labels'                => $labels,
+		'supports'              => array( 'title' ),
+		'hierarchical'          => false,
+		'public'                => true,
+		'show_ui'               => true,
+		'show_in_menu'          => true,
+		'menu_position'         => 6,
+		'menu_icon'             => 'dashicons-art',
+		'show_in_admin_bar'     => true,
+		'show_in_nav_menus'     => true,
+		'can_export'            => true,
+		'has_archive'           => true,
+		'exclude_from_search'   => false,
+		'publicly_queryable'    => true,
+		'capability_type'       => 'page',
+		'show_in_rest'  		=> true,
+	);
+	register_post_type( 'telas', $args );
+
+}
+add_action( 'init', 'crear_post_type_telas', 0 );
