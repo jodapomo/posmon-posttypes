@@ -161,7 +161,7 @@ function wpb_change_title_text_productos( $title ){
 	} else if ( 'lineas' == $screen->post_type ) {
 		$title = 'Introduce el nombre de la línea aquí';
 	} else if ( 'telas' == $screen->post_type ) {
-		$title = 'Introduce el nombre de la tela aquí';
+		$title = 'Introduce el nombre del insumo aquí';
 	}
  
 	return $title;
@@ -174,22 +174,22 @@ add_filter( 'enter_title_here', 'wpb_change_title_text_productos' );
 function crear_post_type_telas() {
 
 	$labels = array(
-		'name'                  => _x( 'Telas', 'Post Type General Name', 'posmon' ),
-		'singular_name'         => _x( 'Tela', 'Post Type Singular Name', 'posmon' ),
-		'menu_name'             => __( 'Telas', 'posmon' ),
-		'name_admin_bar'        => __( 'Tela', 'posmon' ),
+		'name'                  => _x( 'Insumos', 'Post Type General Name', 'posmon' ),
+		'singular_name'         => _x( 'Insumo', 'Post Type Singular Name', 'posmon' ),
+		'menu_name'             => __( 'Insumos', 'posmon' ),
+		'name_admin_bar'        => __( 'Insumo', 'posmon' ),
 		'archives'              => __( 'Item Archives', 'posmon' ),
 		'attributes'            => __( 'Item Attributes', 'posmon' ),
-		'parent_item_colon'     => __( 'Tela Padre', 'posmon' ),
-		'all_items'             => __( 'Todas las Telas', 'posmon' ),
-		'add_new_item'          => __( 'Agregar Nueva Tela', 'posmon' ),
-		'add_new'               => __( 'Agregar Tela', 'posmon' ),
-		'new_item'              => __( 'Nueva Tela', 'posmon' ),
-		'edit_item'             => __( 'Editar Tela', 'posmon' ),
-		'update_item'           => __( 'Actualizar Tela', 'posmon' ),
-		'view_item'             => __( 'Ver Tela', 'posmon' ),
-		'view_items'            => __( 'Ver Telas', 'posmon' ),
-		'search_items'          => __( 'Buscar Tela', 'posmon' ),
+		'parent_item_colon'     => __( 'Insumo Padre', 'posmon' ),
+		'all_items'             => __( 'Todos los Insumos', 'posmon' ),
+		'add_new_item'          => __( 'Agregar Nuevo Insumo', 'posmon' ),
+		'add_new'               => __( 'Agregar Insumo', 'posmon' ),
+		'new_item'              => __( 'Nuevo Insumo', 'posmon' ),
+		'edit_item'             => __( 'Editar Insumo', 'posmon' ),
+		'update_item'           => __( 'Actualizar Insumo', 'posmon' ),
+		'view_item'             => __( 'Ver Insumo', 'posmon' ),
+		'view_items'            => __( 'Ver Insumos', 'posmon' ),
+		'search_items'          => __( 'Buscar Insumo', 'posmon' ),
 		'not_found'             => __( 'No encontrado', 'posmon' ),
 		'not_found_in_trash'    => __( 'No encontrado en la papelera', 'posmon' ),
 		'featured_image'        => __( 'Imagen Destacada', 'posmon' ),
@@ -203,8 +203,8 @@ function crear_post_type_telas() {
 		'filter_items_list'     => __( 'Filtrar lista de elementos', 'posmon' ),
 	);
 	$args = array(
-		'label'                 => __( 'Telas', 'posmon' ),
-		'description'           => __( 'Telas', 'posmon' ),
+		'label'                 => __( 'Insumos', 'posmon' ),
+		'description'           => __( 'Insumos', 'posmon' ),
 		'labels'                => $labels,
 		'supports'              => array( 'title' ),
 		'hierarchical'          => false,
@@ -226,3 +226,32 @@ function crear_post_type_telas() {
 
 }
 add_action( 'init', 'crear_post_type_telas', 0 );
+
+function taxonomia_tipo_insumo() {
+	$labels = array(
+	  'name'              => _x( 'Tipos de Insumo', 'taxonomy general name' ),
+	  'singular_name'     => _x( 'Tipo de Insumo', 'taxonomy singular name' ),
+	  'search_items'      => __( 'Buscar Tipo de Insumo' ),
+	  'all_items'         => __( 'Todos los Tipos de Insumo' ),
+	  'parent_item'       => __( 'Tipo de Insumo Padre' ),
+	  'parent_item_colon' => __( 'Tipo de Insumo Padre:' ),
+	  'edit_item'         => __( 'Editar Tipo de Insumo' ),
+	  'update_item'       => __( 'Actualizar Tipo de Insumo' ),
+	  'add_new_item'      => __( 'Agregar Nuevo Tipo de Insumo' ),
+	  'new_item_name'     => __( 'Nuevo Tipo de Insumo' ),
+	  'menu_name'         => __( 'Tipo de Insumo' ),
+	);
+  
+	$args = array(
+		'hierarchical' => true,
+		'labels' => $labels,
+		'show_ui' => true,
+		'show_admin_column' => true,
+		'query_var' => true,
+		'rewrite' => array('slug' =>'tipo-insumo'),
+	);
+	register_taxonomy( 'tipo-insumo', array('telas'), $args);
+  
+  }
+  
+  add_action('init', 'taxonomia_tipo_insumo');
